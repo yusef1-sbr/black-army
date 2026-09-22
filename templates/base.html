@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+          content="#050505">
+
+    <meta name="description"
+          content="Black Army">
+
+    <title>
+        {% block title %}Black Army{% endblock %}
+    </title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="page-background"></div>
+
+<header class="site-header">
+
+    <div class="container nav-container">
+
+        <a class="brand"
+           href="{{ url_for('home') }}">
+
+            <span class="brand-mark">
+                BA
+            </span>
+
+            <span class="brand-text">
+                BLACK ARMY
+            </span>
+
+        </a>
+
+
+        <button
+            class="mobile-menu-button"
+            id="mobileMenuButton">
+
+            ☰
+
+        </button>
+
+
+        <nav
+            class="main-nav"
+            id="mainNav">
+
+            <a href="#about">
+                معرفی
+            </a>
+
+            <a href="#command">
+                فرماندهی
+            </a>
+
+            <a href="#members">
+                اعضا
+            </a>
+
+            <a href="#news">
+                اخبار
+            </a>
+
+            <a href="#relations">
+                روابط
+            </a>
+
+            <a href="#history">
+                تاریخچه
+            </a>
+
+            <a href="#join">
+                عضویت
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <button
+                id="notificationButton"
+                class="icon-button"
+                title="اعلان‌ها">
+
+                🔔
+
+                <span
+                    id="notificationBadge"
+                    class="notification-badge">
+                    0
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+{% block content %}
+{% endblock %}
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="container footer-inner">
+
+        <div>
+
+            <div class="footer-logo">
+                BLACK ARMY
+            </div>
+
+            <p>
+                سایه‌ها همیشه قبل از ارتش حرکت می‌کنند.
+            </p>
+
+        </div>
+
+
+        <div class="footer-status">
+
+            <span class="status-dot"></span>
+
+            BLACK ARMY SYSTEM ONLINE
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        © Black Army — All rights reserved.
+
+    </div>
+
+</footer>
+
+
+<div
+    id="toastContainer"
+    class="toast-container">
+</div>
+
+
+<script
+    src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1632 @@
+{% extends "base.html" %}
+
+{% block title %}
+Black Army | Owner Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="admin-layout">
+
+
+    <!-- =================================================
+         ADMIN SIDEBAR
+    ================================================== -->
+
+    <aside class="admin-sidebar">
+
+        <div class="admin-sidebar-brand">
+
+            <span class="brand-mark">
+                BA
+            </span>
+
+            <div>
+
+                <strong>
+                    BLACK ARMY
+                </strong>
+
+                <small>
+                    OWNER PANEL
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="admin-nav">
+
+            <a href="#overview">
+                📊 نمای کلی
+            </a>
+
+            <a href="#news-admin">
+                📰 اخبار
+            </a>
+
+            <a href="#join-admin">
+                👥 درخواست‌ها
+
+                {% if pending_joins > 0 %}
+
+                <span class="side-badge">
+                    {{ pending_joins }}
+                </span>
+
+                {% endif %}
+
+            </a>
+
+            <a href="#messages-admin">
+                💬 پیام‌ها
+
+                {% if unread_messages > 0 %}
+
+                <span class="side-badge">
+                    {{ unread_messages }}
+                </span>
+
+                {% endif %}
+
+            </a>
+
+            <a href="#members-admin">
+                👤 اعضا
+            </a>
+
+            <a href="#relations-admin">
+                🤝 روابط
+            </a>
+
+            <a href="#honors-admin">
+                🏆 افتخارات
+            </a>
+
+            <a href="#history-admin">
+                📜 تاریخچه
+            </a>
+
+            <a href="#stats-admin">
+                📈 آمار
+            </a>
+
+            <a href="#security-admin">
+                🔐 امنیت
+            </a>
+
+        </nav>
+
+
+        <a
+            href="{{ url_for('admin_logout') }}"
+            class="admin-logout">
+
+            🚪 خروج
+
+        </a>
+
+    </aside>
+
+
+    <!-- =================================================
+         ADMIN MAIN
+    ================================================== -->
+
+    <main class="admin-main">
+
+
+        <header class="admin-topbar">
+
+            <div>
+
+                <span class="admin-online">
+                    <i></i>
+                    ONLINE
+                </span>
+
+                <h1>
+                    کنترل مرکزی Black Army
+                </h1>
+
+                <p>
+                    مدیریت کامل محتوای سایت
+                </p>
+
+            </div>
+
+
+            <div class="admin-top-actions">
+
+                <button
+                    id="adminNotificationButton"
+                    class="admin-notification-button">
+
+                    🔔
+
+                    <span id="adminBadge">
+                        {{ pending_joins + unread_messages }}
+                    </span>
+
+                </button>
+
+                <a
+                    href="{{ url_for('home') }}"
+                    target="_blank"
+                    class="btn btn-ghost">
+
+                    🌐 سایت
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             OVERVIEW
+        ================================================== -->
+
+        <section
+            id="overview"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        DASHBOARD
+                    </span>
+
+                    <h2>
+                        نمای کلی
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-stat-grid">
+
+                <article class="admin-stat-card">
+
+                    <span>
+                        درخواست عضویت
+                    </span>
+
+                    <strong id="joinCount">
+                        {{ pending_joins }}
+                    </strong>
+
+                    <small>
+                        در انتظار بررسی
+                    </small>
+
+                </article>
+
+
+                <article class="admin-stat-card">
+
+                    <span>
+                        پیام ناشناس
+                    </span>
+
+                    <strong id="messageCount">
+                        {{ unread_messages }}
+                    </strong>
+
+                    <small>
+                        خوانده نشده
+                    </small>
+
+                </article>
+
+
+                <article class="admin-stat-card">
+
+                    <span>
+                        برد
+                    </span>
+
+                    <strong>
+                        {{ stats["wins"] }}+
+                    </strong>
+
+                    <small>
+                        رکورد فعلی
+                    </small>
+
+                </article>
+
+
+                <article class="admin-stat-card">
+
+                    <span>
+                        صلح
+                    </span>
+
+                    <strong>
+                        {{ stats["truces"] }}
+                    </strong>
+
+                    <small>
+                        ثبت‌شده
+                    </small>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NEWS
+        ================================================== -->
+
+        <section
+            id="news-admin"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        NEWS CONTROL
+                    </span>
+
+                    <h2>
+                        مدیریت اخبار
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-two-column">
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('add_news') }}"
+                    class="admin-card">
+
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}">
+
+
+                    <h3>
+                        📰 انتشار خبر
+                    </h3>
+
+                    <p class="admin-help">
+                        این خبر پس از ثبت مستقیماً در سایت عمومی دیده می‌شود.
+                    </p>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            عنوان
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            maxlength="200"
+                            required
+                            placeholder="عنوان خبر">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            متن خبر
+                        </label>
+
+                        <textarea
+                            name="content"
+                            rows="9"
+                            maxlength="10000"
+                            required
+                            placeholder="متن کامل خبر"></textarea>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-primary btn-wide">
+
+                        🚀 انتشار
+
+                    </button>
+
+                </form>
+
+
+                <div class="admin-card">
+
+                    <h3>
+                        اخبار فعلی
+                    </h3>
+
+
+                    <div class="admin-scroll-list">
+
+                        {% for item in news %}
+
+                        <div class="admin-list-item">
+
+                            <div>
+
+                                <strong>
+                                    {{ item["title"] }}
+                                </strong>
+
+                                <p>
+                                    {{ item["content"] }}
+                                </p>
+
+                                <small>
+                                    {{ item["created_at"] }}
+                                </small>
+
+                            </div>
+
+
+                            <form
+                                method="POST"
+                                action="{{ url_for(
+                                    'delete_news',
+                                    news_id=item['id']
+                                ) }}">
+
+                                <input
+                                    type="hidden"
+                                    name="csrf_token"
+                                    value="{{ csrf_token() }}">
+
+                                <button
+                                    class="danger-button"
+                                    title="حذف">
+
+                                    🗑
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                        {% else %}
+
+                        <div class="empty-admin">
+                            خبری وجود ندارد.
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             JOIN REQUESTS
+        ================================================== -->
+
+        <section
+            id="join-admin"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        JOIN REQUESTS
+                    </span>
+
+                    <h2>
+                        درخواست‌های عضویت
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="request-list">
+
+                {% for item in joins %}
+
+                <article class="request-card">
+
+                    <div class="request-head">
+
+                        <div class="request-avatar">
+                            {{ item["name"][0] }}
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                {{ item["name"] }}
+                            </h3>
+
+                            <span>
+                                {{ item["created_at"] }}
+                            </span>
+
+                        </div>
+
+
+                        {% if item["status"] == "pending" %}
+
+                        <span class="status pending">
+                            در انتظار
+                        </span>
+
+                        {% elif item["status"] == "approved" %}
+
+                        <span class="status approved">
+                            تأیید شده
+                        </span>
+
+                        {% else %}
+
+                        <span class="status rejected">
+                            رد شده
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="request-details">
+
+                        {% if item["aparat_id"] %}
+
+                        <div>
+                            <strong>آپارات:</strong>
+                            {{ item["aparat_id"] }}
+                        </div>
+
+                        {% endif %}
+
+                        {% if item["rubika_id"] %}
+
+                        <div>
+                            <strong>روبیکا:</strong>
+                            {{ item["rubika_id"] }}
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="request-description">
+
+                        {{ item["description"] }}
+
+                    </div>
+
+
+                    <div class="request-actions">
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'update_join_status',
+                                request_id=item['id']
+                            ) }}">
+
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="{{ csrf_token() }}">
+
+                            <input
+                                type="hidden"
+                                name="status"
+                                value="approved">
+
+                            <button
+                                class="action-button success">
+
+                                ✅ تأیید
+
+                            </button>
+
+                        </form>
+
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'update_join_status',
+                                request_id=item['id']
+                            ) }}">
+
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="{{ csrf_token() }}">
+
+                            <input
+                                type="hidden"
+                                name="status"
+                                value="rejected">
+
+                            <button
+                                class="action-button warning">
+
+                                ❌ رد
+
+                            </button>
+
+                        </form>
+
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'delete_join',
+                                request_id=item['id']
+                            ) }}">
+
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="{{ csrf_token() }}">
+
+                            <button
+                                class="action-button danger">
+
+                                🗑 حذف
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </article>
+
+                {% else %}
+
+                <div class="empty-admin">
+                    هنوز درخواست عضویتی ثبت نشده.
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ANONYMOUS MESSAGES
+        ================================================== -->
+
+        <section
+            id="messages-admin"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        ANONYMOUS
+                    </span>
+
+                    <h2>
+                        پیام‌های ناشناس
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="message-list">
+
+                {% for item in messages %}
+
+                <article
+                    class="message-card {% if item['is_read'] == 0 %}unread{% endif %}">
+
+                    <div class="message-meta">
+
+                        <span>
+                            #{{ item["id"] }}
+                        </span>
+
+                        <span>
+                            {{ item["created_at"] }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="anonymous-label">
+                        🔒 ANONYMOUS
+                    </div>
+
+
+                    <p>
+                        {{ item["message"] }}
+                    </p>
+
+
+                    <div class="message-actions">
+
+                        {% if item["is_read"] == 0 %}
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'mark_message_read',
+                                message_id=item['id']
+                            ) }}">
+
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="{{ csrf_token() }}">
+
+                            <button
+                                class="action-button success">
+
+                                ✓ خوانده شد
+
+                            </button>
+
+                        </form>
+
+                        {% endif %}
+
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'delete_message',
+                                message_id=item['id']
+                            ) }}">
+
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="{{ csrf_token() }}">
+
+                            <button
+                                class="action-button danger">
+
+                                🗑 حذف
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </article>
+
+                {% else %}
+
+                <div class="empty-admin">
+                    هیچ پیام ناشناسی ثبت نشده.
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             MEMBERS
+        ================================================== -->
+
+        <section
+            id="members-admin"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        MEMBERS
+                    </span>
+
+                    <h2>
+                        مدیریت اعضا
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('add_member') }}"
+                class="admin-card">
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}">
+
+
+                <h3>
+                    ➕ افزودن عضو مستقیم
+                </h3>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            نام
+                        </label>
+
+                        <input
+                            name="name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            آیدی آپارات
+                        </label>
+
+                        <input
+                            name="aparat_id">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            آیدی روبیکا
+                        </label>
+
+                        <input
+                            name="rubika_id">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            رتبه
+                        </label>
+
+                        <input
+                            name="rank"
+                            value="عضو">
+
+                    </div>
+
+
+                    <div class="form-group form-full">
+
+                        <label>
+                            توضیحات
+                        </label>
+
+                        <textarea
+                            name="bio"
+                            rows="4"></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button class="btn btn-primary">
+                    افزودن عضو
+                </button>
+
+            </form>
+
+
+            <div class="member-admin-grid">
+
+                {% for member in members %}
+
+                <article class="member-admin-card">
+
+                    <div class="member-admin-top">
+
+                        <div class="request-avatar">
+                            {{ member["name"][0] }}
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                {{ member["name"] }}
+                            </h3>
+
+                            <span>
+                                {{ member["rank"] }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        method="POST"
+                        action="{{ url_for(
+                            'update_member',
+                            member_id=member['id']
+                        ) }}">
+
+                        <input
+                            type="hidden"
+                            name="csrf_token"
+                            value="{{ csrf_token() }}">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                نام
+                            </label>
+
+                            <input
+                                name="name"
+                                value="{{ member['name'] }}"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                رتبه
+                            </label>
+
+                            <input
+                                name="rank"
+                                value="{{ member['rank'] }}">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                وضعیت
+                            </label>
+
+                            <select name="status">
+
+                                <option
+                                    value="active"
+                                    {% if member["status"] == "active" %}
+                                    selected
+                                    {% endif %}>
+                                    فعال
+                                </option>
+
+                                <option
+                                    value="inactive"
+                                    {% if member["status"] == "inactive" %}
+                                    selected
+                                    {% endif %}>
+                                    غیرفعال
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                توضیحات
+                            </label>
+
+                            <textarea
+                                name="bio"
+                                rows="4">{{ member["bio"] or "" }}</textarea>
+
+                        </div>
+
+
+                        <div class="inline-actions">
+
+                            <button class="action-button success">
+                                ذخیره
+                            </button>
+
+                            </form>
+
+
+                            <form
+                                method="POST"
+                                action="{{ url_for(
+                                    'delete_member',
+                                    member_id=member['id']
+                                ) }}">
+
+                                <input
+                                    type="hidden"
+                                    name="csrf_token"
+                                    value="{{ csrf_token() }}">
+
+                                <button
+                                    class="action-button danger">
+
+                                    حذف
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RELATIONS
+        ================================================== -->
+
+        <section
+            id="relations-admin"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        RELATIONS
+                    </span>
+
+                    <h2>
+                        مدیریت روابط
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('add_relation') }}"
+                class="admin-card">
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}">
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            نوع
+                        </label>
+
+                        <select name="kind">
+
+                            <option value="alliance">
+                                متحد
+                            </option>
+
+                            <option value="enemy">
+                                دشمن
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            نام
+                        </label>
+
+                        <input
+                            name="name"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group form-full">
+
+                        <label>
+                            توضیح
+                        </label>
+
+                        <input
+                            name="description">
+
+                    </div>
+
+                </div>
+
+
+                <button class="btn btn-primary">
+                    افزودن
+                </button>
+
+            </form>
+
+
+            <div class="relation-admin-grid">
+
+                <div class="admin-card">
+
+                    <h3>
+                        🤝 متحدان
+                    </h3>
+
+                    {% for item in alliances %}
+
+                    <div class="simple-admin-row">
+
+                        <span>
+                            {{ item["name"] }}
+                        </span>
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'delete_relation',
+                                relation_id=item['id']
+                            ) }}">
+
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="{{ csrf_token() }}">
+
+                            <button class="danger-button">
+                                🗑
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <div class="admin-card">
+
+                    <h3>
+                        ☠️ دشمنان
+                    </h3>
+
+                    {% for item in enemies %}
+
+                    <div class="simple-admin-row">
+
+                        <span>
+                            {{ item["name"] }}
+                        </span>
+
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'delete_relation',
+                                relation_id=item['id']
+                            ) }}">
+
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                value="{{ csrf_token() }}">
+
+                            <button class="danger-button">
+                                🗑
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             HONORS
+        ================================================== -->
+
+        <section
+            id="honors-admin"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        HONORS
+                    </span>
+
+                    <h2>
+                        مدیریت افتخارات
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('add_honor') }}"
+                class="admin-card">
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            عنوان
+                        </label>
+
+                        <input
+                            name="title"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            تاریخ
+                        </label>
+
+                        <input
+                            name="date_label"
+                            placeholder="مثلاً 2026">
+
+                    </div>
+
+
+                    <div class="form-group form-full">
+
+                        <label>
+                            توضیح
+                        </label>
+
+                        <textarea
+                            name="description"
+                            rows="4"></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button class="btn btn-primary">
+                    ثبت افتخار
+                </button>
+
+            </form>
+
+
+            {% for honor in honors %}
+
+            <div class="simple-admin-row large">
+
+                <div>
+
+                    <strong>
+                        {{ honor["title"] }}
+                    </strong>
+
+                    <small>
+                        {{ honor["date_label"] or "" }}
+                    </small>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for(
+                        'delete_honor',
+                        honor_id=honor['id']
+                    ) }}">
+
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}">
+
+                    <button class="danger-button">
+                        🗑
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endfor %}
+
+        </section>
+
+
+        <!-- =================================================
+             HISTORY
+        ================================================== -->
+
+        <section
+            id="history-admin"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        HISTORY
+                    </span>
+
+                    <h2>
+                        مدیریت تاریخچه
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('add_history') }}"
+                class="admin-card">
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            سال / دوره
+                        </label>
+
+                        <input
+                            name="year_label"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            عنوان
+                        </label>
+
+                        <input
+                            name="title"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group form-full">
+
+                        <label>
+                            توضیح
+                        </label>
+
+                        <textarea
+                            name="content"
+                            rows="5"
+                            required></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button class="btn btn-primary">
+                    افزودن رویداد
+                </button>
+
+            </form>
+
+
+            {% for event in history %}
+
+            <div class="simple-admin-row large">
+
+                <div>
+
+                    <strong>
+                        {{ event["year_label"] }}
+                        —
+                        {{ event["title"] }}
+                    </strong>
+
+                    <small>
+                        {{ event["content"] }}
+                    </small>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for(
+                        'delete_history',
+                        event_id=event['id']
+                    ) }}">
+
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}">
+
+                    <button class="danger-button">
+                        🗑
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endfor %}
+
+        </section>
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section
+            id="stats-admin"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        RECORDS
+                    </span>
+
+                    <h2>
+                        مدیریت آمار
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('update_stats') }}"
+                class="admin-card">
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}">
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            برد
+                        </label>
+
+                        <input
+                            type="number"
+                            name="wins"
+                            min="0"
+                            value="{{ stats['wins'] }}"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            شکست
+                        </label>
+
+                        <input
+                            type="number"
+                            name="losses"
+                            min="0"
+                            value="{{ stats['losses'] }}"
+                            required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            صلح
+                        </label>
+
+                        <input
+                            type="number"
+                            name="truces"
+                            min="0"
+                            value="{{ stats['truces'] }}"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <button class="btn btn-primary">
+                    💾 ذخیره آمار
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- =================================================
+             SECURITY
+        ================================================== -->
+
+        <section
+            id="security-admin"
+            class="admin-section">
+
+            <div class="admin-section-title">
+
+                <div>
+
+                    <span>
+                        SECURITY
+                    </span>
+
+                    <h2>
+                        امنیت
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('change_password') }}"
+                class="admin-card security-card">
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}">
+
+
+                <h3>
+                    🔐 تغییر رمز مالک
+                </h3>
+
+                <p class="admin-help">
+                    رمز جدید حداقل باید ۸ کاراکتر داشته باشد.
+                </p>
+
+
+                <div class="form-group">
+
+                    <label>
+                        رمز فعلی
+                    </label>
+
+                    <input
+                        type="password"
+                        name="old_password"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        رمز جدید
+                    </label>
+
+                    <input
+                        type="password"
+                        name="new_password"
+                        minlength="8"
+                        required>
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary">
+
+                    🔒 تغییر رمز
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+{% endblock %}

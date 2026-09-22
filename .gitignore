@@ -1,0 +1,7 @@
+.secret_key
+black_army.db
+bot.py
+__pycache__/
+*.pyc
+.env
+black_army_data.json

@@ -1,0 +1,1083 @@
+{% extends "base.html" %}
+
+{% block title %}
+BLACK ARMY | Official
+{% endblock %}
+
+{% block content %}
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+    <div class="hero-grid"></div>
+
+    <div class="hero-glow glow-one"></div>
+    <div class="hero-glow glow-two"></div>
+
+    <div class="container hero-content">
+
+        <div class="hero-badge">
+            ⚔ SYSTEM ONLINE
+        </div>
+
+        <h1>
+            BLACK
+            <span>ARMY</span>
+        </h1>
+
+        <p class="hero-subtitle">
+
+            یک اتحاد.
+            یک ساختار.
+            یک نام.
+
+        </p>
+
+        <p class="hero-description">
+
+            مرکز رسمی اطلاعات Black Army؛
+            شامل اخبار، اعضا، فرماندهی، تاریخچه،
+            روابط و درخواست عضویت.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#command"
+                class="btn btn-primary">
+
+                مشاهده فرماندهی
+
+            </a>
+
+            <a
+                href="#join"
+                class="btn btn-ghost">
+
+                درخواست عضویت
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="scroll-indicator">
+
+        <span></span>
+
+        Scroll
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATS
+====================================================== -->
+
+<section class="stats-section">
+
+    <div class="container">
+
+        <div class="section-heading center reveal">
+
+            <span>
+                BLACK ARMY RECORD
+            </span>
+
+            <h2>
+                آمار فعلی
+            </h2>
+
+            <p>
+                آخرین آمار ثبت‌شده در سیستم
+            </p>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <article class="stat-card reveal">
+
+                <div class="stat-icon">
+                    🏆
+                </div>
+
+                <div
+                    class="stat-value counter"
+                    data-value="{{ stats['wins'] }}">
+
+                    {{ stats['wins'] }}+
+
+                </div>
+
+                <div class="stat-label">
+                    برد
+                </div>
+
+            </article>
+
+
+            <article class="stat-card reveal">
+
+                <div class="stat-icon">
+                    ❌
+                </div>
+
+                <div
+                    class="stat-value counter"
+                    data-value="{{ stats['losses'] }}">
+
+                    {{ stats['losses'] }}
+
+                </div>
+
+                <div class="stat-label">
+                    شکست
+                </div>
+
+            </article>
+
+
+            <article class="stat-card reveal">
+
+                <div class="stat-icon">
+                    🤝
+                </div>
+
+                <div
+                    class="stat-value counter"
+                    data-value="{{ stats['truces'] }}">
+
+                    {{ stats['truces'] }}
+
+                </div>
+
+                <div class="stat-label">
+                    صلح
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ABOUT
+====================================================== -->
+
+<section
+    id="about"
+    class="section">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <span>
+                ABOUT
+            </span>
+
+            <h2>
+                درباره Black Army
+            </h2>
+
+            <p>
+                یک ساختار سازمان‌یافته با فرماندهی مشخص،
+                اعضا، متحدان، دشمنان، اخبار و تاریخچه.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <article class="feature-card reveal">
+
+                <div class="feature-number">
+                    01
+                </div>
+
+                <div class="feature-icon">
+                    ⚔️
+                </div>
+
+                <h3>
+                    ساختار فرماندهی
+                </h3>
+
+                <p>
+                    فرماندهی به چند سطح تقسیم شده تا
+                    ساختار و مسئولیت‌ها واضح باشند.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card reveal">
+
+                <div class="feature-number">
+                    02
+                </div>
+
+                <div class="feature-icon">
+                    📰
+                </div>
+
+                <h3>
+                    اخبار رسمی
+                </h3>
+
+                <p>
+                    اخبار فقط توسط مالک سایت منتشر می‌شوند
+                    و کاربران عمومی امکان انتشار مستقیم خبر ندارند.
+                </p>
+
+            </article>
+
+
+            <article class="feature-card reveal">
+
+                <div class="feature-number">
+                    03
+                </div>
+
+                <div class="feature-icon">
+                    🔒
+                </div>
+
+                <h3>
+                    مدیریت اختصاصی
+                </h3>
+
+                <p>
+                    درخواست‌های عضویت و پیام‌های ناشناس
+                    مستقیماً در پنل خصوصی مالک ذخیره می‌شوند.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     COMMAND
+====================================================== -->
+
+<section
+    id="command"
+    class="section section-dark">
+
+    <div class="container">
+
+        <div class="section-heading center reveal">
+
+            <span>
+                COMMAND
+            </span>
+
+            <h2>
+                ساختار فرماندهی
+            </h2>
+
+        </div>
+
+
+        <div class="command-section">
+
+            <h3 class="subheading">
+                👑 Owners
+            </h3>
+
+
+            <div class="command-grid">
+
+                {% for person in command_structure.owners %}
+
+                <article
+                    class="person-card owner-card reveal">
+
+                    <div class="person-rank">
+                        OWNER
+                    </div>
+
+                    <div class="person-avatar">
+                        {{ person.name[0] }}
+                    </div>
+
+                    <h3>
+                        {{ person.name }}
+                    </h3>
+
+                    {% if person.alias %}
+
+                    <p>
+                        {{ person.alias }}
+                    </p>
+
+                    {% endif %}
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+
+            <h3 class="subheading">
+                🛡 Leader 1
+            </h3>
+
+            <div class="command-grid">
+
+                {% for person in command_structure.leader_1 %}
+
+                <article class="person-card reveal">
+
+                    <div class="person-rank">
+                        LEADER 1
+                    </div>
+
+                    <div class="person-avatar">
+                        {{ person.name[0] }}
+                    </div>
+
+                    <h3>
+                        {{ person.name }}
+                    </h3>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+
+            <h3 class="subheading">
+                🛡 Leader 2
+            </h3>
+
+            <div class="command-grid">
+
+                {% for person in command_structure.leader_2 %}
+
+                <article class="person-card reveal">
+
+                    <div class="person-rank">
+                        LEADER 2
+                    </div>
+
+                    <div class="person-avatar">
+                        {{ person.name[0] }}
+                    </div>
+
+                    <h3>
+                        {{ person.name }}
+                    </h3>
+
+                    {% if person.alias %}
+
+                    <p>
+                        {{ person.alias }}
+                    </p>
+
+                    {% endif %}
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+
+            <h3 class="subheading">
+                🛡 Leader 3
+            </h3>
+
+            <div class="command-grid">
+
+                {% for person in command_structure.leader_3 %}
+
+                <article class="person-card reveal">
+
+                    <div class="person-rank">
+                        LEADER 3
+                    </div>
+
+                    <div class="person-avatar">
+                        {{ person.name[0] }}
+                    </div>
+
+                    <h3>
+                        {{ person.name }}
+                    </h3>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MEMBERS
+====================================================== -->
+
+<section
+    id="members"
+    class="section">
+
+    <div class="container">
+
+        <div class="section-heading center reveal">
+
+            <span>
+                MEMBERS
+            </span>
+
+            <h2>
+                اعضای ثبت‌شده
+            </h2>
+
+            <p>
+                اعضایی که درخواست عضویت آن‌ها توسط مالک تأیید شده است.
+            </p>
+
+        </div>
+
+
+        {% if members %}
+
+        <div class="members-grid">
+
+            {% for member in members %}
+
+            <article class="member-card reveal">
+
+                <div class="member-avatar">
+                    {{ member["name"][0] }}
+                </div>
+
+                <div class="member-info">
+
+                    <h3>
+                        {{ member["name"] }}
+                    </h3>
+
+                    <span class="rank-pill">
+                        {{ member["rank"] }}
+                    </span>
+
+                    {% if member["bio"] %}
+
+                    <p>
+                        {{ member["bio"] }}
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            هنوز عضو تأییدشده‌ای ثبت نشده است.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NEWS
+====================================================== -->
+
+<section
+    id="news"
+    class="section section-dark">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <span>
+                NEWS
+            </span>
+
+            <h2>
+                اخبار رسمی
+            </h2>
+
+            <p>
+                آخرین اخبار منتشرشده توسط مالک سایت.
+            </p>
+
+        </div>
+
+
+        {% if news %}
+
+        <div
+            id="publicNewsGrid"
+            class="news-grid">
+
+            {% for item in news %}
+
+            <article
+                class="news-card reveal"
+                data-news-id="{{ item['id'] }}">
+
+                <div class="news-top">
+
+                    <span class="news-tag">
+                        OFFICIAL
+                    </span>
+
+                    <span class="news-date">
+                        {{ item["created_at"] }}
+                    </span>
+
+                </div>
+
+                <h3>
+                    {{ item["title"] }}
+                </h3>
+
+                <p>
+                    {{ item["content"] }}
+                </p>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            هنوز خبری منتشر نشده است.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     RELATIONS
+====================================================== -->
+
+<section
+    id="relations"
+    class="section">
+
+    <div class="container">
+
+        <div class="section-heading center reveal">
+
+            <span>
+                RELATIONS
+            </span>
+
+            <h2>
+                روابط Black Army
+            </h2>
+
+        </div>
+
+
+        <div class="relations-grid">
+
+            <div class="relation-panel alliance-panel reveal">
+
+                <div class="relation-header">
+
+                    <span class="relation-symbol">
+                        🤝
+                    </span>
+
+                    <div>
+                        <h3>
+                            متحدان
+                        </h3>
+
+                        <p>
+                            Alliances
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="relation-list">
+
+                    {% for relation in alliances %}
+
+                    <div class="relation-item">
+
+                        <strong>
+                            {{ relation["name"] }}
+                        </strong>
+
+                        {% if relation["description"] %}
+
+                        <span>
+                            {{ relation["description"] }}
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <div class="relation-panel enemy-panel reveal">
+
+                <div class="relation-header">
+
+                    <span class="relation-symbol">
+                        ☠️
+                    </span>
+
+                    <div>
+                        <h3>
+                            دشمنان
+                        </h3>
+
+                        <p>
+                            Enemies
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="relation-list">
+
+                    {% for relation in enemies %}
+
+                    <div class="relation-item">
+
+                        <strong>
+                            {{ relation["name"] }}
+                        </strong>
+
+                        {% if relation["description"] %}
+
+                        <span>
+                            {{ relation["description"] }}
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HONORS
+====================================================== -->
+
+<section class="section section-dark">
+
+    <div class="container">
+
+        <div class="section-heading center reveal">
+
+            <span>
+                HONORS
+            </span>
+
+            <h2>
+                افتخارات
+            </h2>
+
+        </div>
+
+
+        {% if honors %}
+
+        <div class="honors-grid">
+
+            {% for honor in honors %}
+
+            <article class="honor-card reveal">
+
+                <div class="honor-icon">
+                    🏆
+                </div>
+
+                <div>
+
+                    {% if honor["date_label"] %}
+
+                    <span class="honor-date">
+                        {{ honor["date_label"] }}
+                    </span>
+
+                    {% endif %}
+
+                    <h3>
+                        {{ honor["title"] }}
+                    </h3>
+
+                    {% if honor["description"] %}
+
+                    <p>
+                        {{ honor["description"] }}
+                    </p>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            افتخاری هنوز ثبت نشده است.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     HISTORY
+====================================================== -->
+
+<section
+    id="history"
+    class="section">
+
+    <div class="container">
+
+        <div class="section-heading center reveal">
+
+            <span>
+                HISTORY
+            </span>
+
+            <h2>
+                تاریخچه
+            </h2>
+
+        </div>
+
+
+        {% if history %}
+
+        <div class="timeline">
+
+            {% for event in history %}
+
+            <article class="timeline-item reveal">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-card">
+
+                    <span class="timeline-year">
+                        {{ event["year_label"] }}
+                    </span>
+
+                    <h3>
+                        {{ event["title"] }}
+                    </h3>
+
+                    <p>
+                        {{ event["content"] }}
+                    </p>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+            تاریخچه‌ای هنوز ثبت نشده است.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     JOIN
+====================================================== -->
+
+<section
+    id="join"
+    class="section section-dark">
+
+    <div class="container narrow">
+
+        <div class="section-heading center reveal">
+
+            <span>
+                JOIN
+            </span>
+
+            <h2>
+                درخواست عضویت
+            </h2>
+
+            <p>
+                اطلاعاتت را ارسال کن تا مالک درخواست را بررسی کند.
+            </p>
+
+        </div>
+
+
+        <form
+            method="POST"
+            action="{{ url_for('join_request') }}"
+            class="glass-form reveal">
+
+            <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token() }}">
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        نام
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        maxlength="80"
+                        required
+                        placeholder="نام یا اسم مستعار">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        آیدی آپارات
+                    </label>
+
+                    <input
+                        type="text"
+                        name="aparat_id"
+                        maxlength="120"
+                        placeholder="@username">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        آیدی روبیکا
+                    </label>
+
+                    <input
+                        type="text"
+                        name="rubika_id"
+                        maxlength="120"
+                        placeholder="@username">
+
+                </div>
+
+
+                <div class="form-group form-full">
+
+                    <label>
+                        درباره خودت
+                    </label>
+
+                    <textarea
+                        name="description"
+                        maxlength="1200"
+                        required
+                        rows="6"
+                        placeholder="خودت را معرفی کن..."></textarea>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-wide">
+
+                🚀 ارسال درخواست
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ANONYMOUS
+====================================================== -->
+
+<section
+    id="anonymous"
+    class="section">
+
+    <div class="container narrow">
+
+        <div class="section-heading center reveal">
+
+            <span>
+                ANONYMOUS
+            </span>
+
+            <h2>
+                پیام ناشناس
+            </h2>
+
+            <p>
+                پیامت بدون نمایش نام و آیدی عمومی برای مالک ارسال می‌شود.
+            </p>
+
+        </div>
+
+
+        <form
+            method="POST"
+            action="{{ url_for('anonymous_message') }}"
+            class="glass-form anonymous-form reveal">
+
+            <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token() }}">
+
+
+            <div class="form-group">
+
+                <label>
+                    پیام
+                </label>
+
+                <textarea
+                    name="message"
+                    maxlength="3000"
+                    rows="8"
+                    required
+                    placeholder="پیامت را بنویس..."></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary btn-wide">
+
+                💬 ارسال ناشناس
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+{% if request.args.get("joined") %}
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        showToast("✅ درخواست عضویت برای مالک ارسال شد.");
+    });
+</script>
+
+{% endif %}
+
+
+{% if request.args.get("sent") %}
+
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        showToast("💬 پیام ناشناس ارسال شد.");
+    });
+</script>
+
+{% endif %}
+
+
+{% endblock %}

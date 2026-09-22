@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}
+Black Army | Owner Login
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-login-page">
+
+    <div class="admin-orb orb-a"></div>
+    <div class="admin-orb orb-b"></div>
+
+    <div class="admin-login-card reveal">
+
+        <div class="admin-crown">
+            👑
+        </div>
+
+        <span class="admin-eyebrow">
+            PRIVATE ACCESS
+        </span>
+
+        <h1>
+            Owner Panel
+        </h1>
+
+        <p>
+            ورود فقط برای مالک سایت
+        </p>
+
+
+        {% if error %}
+
+        <div class="error-box">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            class="admin-login-form">
+
+            <input
+                type="hidden"
+                name="csrf_token"
+                value="{{ csrf_token() }}">
+
+
+            <div class="form-group">
+
+                <label>
+                    رمز عبور
+                </label>
+
+                <input
+                    type="password"
+                    name="password"
+                    required
+                    autocomplete="current-password"
+                    placeholder="رمز مالک">
+
+            </div>
+
+
+            <button
+                class="btn btn-primary btn-wide"
+                type="submit">
+
+                🔐 ورود
+
+            </button>
+
+        </form>
+
+
+        <a
+            href="{{ url_for('home') }}"
+            class="back-home">
+
+            ← بازگشت به سایت
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
