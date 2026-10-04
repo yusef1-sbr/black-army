@@ -35,8 +35,6 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='black-army-v2.css') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='black-army-v3.css') }}">
-
 </head>
 
 <body>
@@ -101,13 +99,6 @@
             <a href="#join">
                 عضویت
             </a>
-
-            <a href="{{ url_for('admin_login') }}" class="owner-entry">
-
-                🔐 ورود مالکین
-
-            </a>
-
 
         </nav>
 
@@ -191,8 +182,6 @@
 </script>
 
     <script src="{{ url_for('static', filename='black-army-v2.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='black-army-v3.js') }}"></script>
 
 </body>
 </html>
