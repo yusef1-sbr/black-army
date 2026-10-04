@@ -386,29 +386,42 @@ def owner_required():
 
 FAILED_LOGINS = {}
 
-MAX_LOGIN_ATTEMPTS = 6
-LOGIN_WINDOW = 300
+MAX_LOGIN_ATTEMPTS = 3
+LOGIN_LOCKOUT = 3600  # 1 hour
 
 
 def login_allowed(ip):
     now = time.time()
 
-    attempts = FAILED_LOGINS.get(ip, [])
+    data = FAILED_LOGINS.get(ip)
 
-    attempts = [
-        t for t in attempts
-        if now - t < LOGIN_WINDOW
-    ]
+    if not data:
+        return True
 
-    FAILED_LOGINS[ip] = attempts
+    locked_until = data.get("locked_until", 0)
 
-    return len(attempts) < MAX_LOGIN_ATTEMPTS
+    if locked_until > now:
+        return False
+
+    FAILED_LOGINS.pop(ip, None)
+    return True
 
 
 def register_failed_login(ip):
-    FAILED_LOGINS.setdefault(ip, []).append(time.time())
+    now = time.time()
 
+    data = FAILED_LOGINS.setdefault(
+        ip,
+        {
+            "attempts": 0,
+            "locked_until": 0
+        }
+    )
 
+    data["attempts"] += 1
+
+    if data["attempts"] >= MAX_LOGIN_ATTEMPTS:
+        data["locked_until"] = now + LOGIN_LOCKOUT
 # =========================================================
 # TEMPLATE CONTEXT
 # =========================================================
@@ -656,7 +669,7 @@ def admin_login():
         if not login_allowed(ip):
             return render_template(
                 "admin_login.html",
-                error="تعداد تلاش‌های ورود زیاد است. چند دقیقه بعد دوباره امتحان کن."
+                error="به دلیل ۳ تلاش ناموفق، ورود شما به مدت ۱ ساعت قفل شده است."
             )
 
         password = request.form.get("password", "")
